@@ -1,284 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aadya Pandey | My Creative Profile 💜</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aadya Profile</title>
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-  * { box-sizing: border-box; font-family: "Poppins", sans-serif; }
+  <style>
+    body {
+      background-color: #7e57c2; /* Purple */
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: white;
+      text-align: center;
+    }
 
-  body {
-    background: linear-gradient(135deg, #f3e8ff, #e0c3fc, #f9d1ff);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
-    margin: 0;
-    padding: 0;
-    color: #3a2d63;
-    overflow-x: hidden;
-  }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+    }
 
-  @keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 4px solid white;
+      margin-top: 15px;
+    }
 
-  .container {
-    max-width: 900px;
-    margin: 40px auto;
-    background: rgba(255,255,255,0.9);
-    border-radius: 24px;
-    box-shadow: 0 20px 40px rgba(120, 70, 255, 0.2);
-    padding: 30px;
-    position: relative;
-    overflow: hidden;
-  }
+    .comment-section {
+      background: white;
+      color: black;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
 
-  /* Sparkles */
-  .sparkle {
-    position: absolute;
-    background: white;
-    border-radius: 50%;
-    opacity: 0.7;
-    animation: sparkle 5s linear infinite;
-  }
-  @keyframes sparkle {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(100vh); opacity: 0; }
-  }
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      resize: none;
+      height: 80px;
+    }
 
-  .profile-header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
+    button {
+      background-color: #7e57c2;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      margin-top: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
 
-  .profile-pic {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    border: 5px solid #b48ef7;
-    box-shadow: 0 0 20px rgba(180,142,247,0.4);
-    object-fit: cover;
-  }
+    button:hover {
+      background-color: #5e35b1;
+    }
 
-  .intro h1 {
-    color: #8b5cf6;
-    font-size: 32px;
-    font-weight: 700;
-    margin: 0;
-  }
-
-  .intro p {
-    margin: 6px 0;
-    font-size: 16px;
-  }
-
-  .youtube-highlight {
-    background: linear-gradient(90deg, #a26ef7, #d76cf7);
-    color: white;
-    padding: 14px 20px;
-    border-radius: 16px;
-    margin-top: 10px;
-    text-align: center;
-    font-weight: 600;
-    box-shadow: 0 4px 12px rgba(171,90,255,0.4);
-    animation: pulse 2s infinite;
-  }
-  .youtube-highlight a {
-    color: white;
-    text-decoration: none;
-  }
-  @keyframes pulse {
-    0%,100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-  }
-
-  .section {
-    margin-top: 30px;
-    background: white;
-    border-radius: 18px;
-    padding: 20px;
-    box-shadow: 0 8px 20px rgba(120, 70, 255, 0.08);
-    animation: fadeIn 1s ease both;
-  }
-
-  .section h3 {
-    color: #8b5cf6;
-    margin-bottom: 8px;
-  }
-
-  .grid {
-    display: grid;
-    gap: 16px;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  }
-
-  .comment-box {
-    margin-top: 30px;
-    padding: 20px;
-    background: #f4e9ff;
-    border-radius: 16px;
-  }
-  .comment-box h3 { color: #8b5cf6; }
-  textarea {
-    width: 100%;
-    min-height: 80px;
-    border: 2px solid #c9a9ff;
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 14px;
-    resize: none;
-  }
-  .add-btn {
-    background: #8b5cf6;
-    border: none;
-    color: white;
-    padding: 10px 16px;
-    border-radius: 10px;
-    margin-top: 8px;
-    cursor: pointer;
-    font-size: 15px;
-  }
-  .comment {
-    background: white;
-    border-radius: 10px;
-    padding: 8px;
-    margin-top: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.10);
-  }
-</style>
+    .comment-item {
+      background: #f3f0ff;
+      padding: 10px;
+      border-radius: 6px;
+      margin-top: 10px;
+      text-align: left;
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="container">
+  <div class="container">
+    <img class="profile-pic" src="aadya-profile.jpg" alt="Aadya Profile">
 
-  <!-- Sparkles -->
-  <div class="sparkle" style="top:-10px; left:10%; width:6px; height:6px; animation-delay:1s;"></div>
-  <div class="sparkle" style="top:-10px; left:50%; width:8px; height:8px; animation-delay:2s;"></div>
-  <div class="sparkle" style="top:-10px; left:80%; width:5px; height:5px; animation-delay:3s;"></div>
+    <h1>Hello! I am Aadya 👋</h1>
+    <p>Welcome to my profile page!</p>
 
-  <div class="profile-header">
-    <div>
-      <img id="avatar" class="profile-pic" src="aadya-profile.jpg" alt="Aadya Avatar">
-    </div>
+    <div class="comment-section">
+      <h2>Leave a Comment ✨</h2>
 
-    <div class="intro">
-      <h1>💜 Aadya Pandey</h1>
-      <p>Age 9 | Student at Billabong High International School 📘</p>
-      <p>Born in Indore, living in Pune ✈️</p>
+      <textarea id="commentInput" placeholder="Write something..."></textarea>
+      <button id="postButton">Post</button>
 
-      <div class="youtube-highlight">
-        🎥 <a href="https://www.youtube.com/channel/UCnNuVUPdmeatRnlR-Zwbl4g" target="_blank">
-          Visit my YouTube Channel — Dancingdoll #Aadu 💃
-        </a>
-      </div>
+      <h3>Comments</h3>
+      <div id="commentsList"></div>
     </div>
   </div>
 
-  <div class="section grid">
-    <div>
-      <h3>🌟 My Goals</h3>
-      <p>I want to become a <b>paediatrician</b> 👩‍⚕️ and help children stay healthy!</p>
-    </div>
-    <div>
-      <h3>🚀 My Inspiration</h3>
-      <p><b>Dr. APJ Abdul Kalam</b> — for his knowledge and kindness 🌠</p>
-    </div>
-    <div>
-      <h3>📚 My Favourite Books</h3>
-      <p>Harry Potter & The Little Prince 💫</p>
-    </div>
-  </div>
+  <!-- Firebase Code -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+    import { getDatabase, ref, push, onValue }
+      from "https://www.gstatic.com/firebasejs/12.5.0/firebase-database.js";
 
-  <div class="section grid">
-    <div>
-      <h3>🎨 My Hobbies</h3>
-      <p>Dancing | Reading | Sketching | Basketball</p>
-    </div>
-    <div>
-      <h3>🎂 My Birthday</h3>
-      <p>11th September 2016 🎉🍰</p>
-    </div>
-    <div>
-      <h3>🌈 My Favourite Festival</h3>
-      <p>Holi — playing colours with friends! 💦🌸</p>
-    </div>
-  </div>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAXiWeS0W7JMPZCU5w6mc_NVbvX7Qyn6ck",
+      authDomain: "aadya-profile-comments.firebaseapp.com",
+      projectId: "aadya-profile-comments",
+      storageBucket: "aadya-profile-comments.firebasestorage.app",
+      messagingSenderId: "176771895161",
+      appId: "1:176771895161:web:dd2912e0680e9144b7e9a8",
+      measurementId: "G-M8TKZFDWFG",
+      databaseURL: "https://aadya-profile-comments-default-rtdb.asia-southeast1.firebasedatabase.app" 
+    };
 
-  <div class="section grid">
-    <div>
-      <h3>🌍 My Favourite Trip</h3>
-      <p>Rajasthan — jungle safari, temple visit & elephant ride 🐘⛺</p>
-    </div>
-    <div>
-      <h3>👧 My Sister</h3>
-      <p>Ayra — smart, creative & a great dancer 💃🌸</p>
-    </div>
-    <div>
-      <h3>🚗 Family Adventures</h3>
-      <p>I love traveling in planes and cars with my family ✈️🚗💜</p>
-    </div>
-  </div>
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
 
-  <!-- Comments Section -->
-  <div class="comment-box">
-    <h3>💬 Leave a Comment for Aadya</h3>
-    <textarea id="commentInput" placeholder="Write your message..."></textarea><br>
-    <button class="add-btn" id="postComment">Post</button>
-    <h3>Comments</h3>
-    <div id="commentList"></div>
-  </div>
+    // ✅ Save comment to Realtime DB
+    document.getElementById("postButton").addEventListener("click", () => {
+      const message = document.getElementById("commentInput").value;
+      if (message.trim() === "") return;
 
-  <footer>✨ Made with love by <b>Aadya Pandey</b> 💜</footer>
-</div>
+      push(ref(db, "comments"), {
+        text: message,
+        time: Date.now()
+      });
 
-<!-- Firebase -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp } 
-    from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyAXiWeS0W7JMPZCU5w6mc_NVbvX7Qyn6ck",
-    authDomain: "aadya-profile-comments.firebaseapp.com",
-    projectId: "aadya-profile-comments",
-    storageBucket: "aadya-profile-comments.firebasestorage.app",
-    messagingSenderId: "176771895161",
-    appId: "1:176771895161:web:dd2912e0680e9144b7e9a8"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  const commentInput = document.getElementById("commentInput");
-  const postBtn = document.getElementById("postComment");
-  const commentList = document.getElementById("commentList");
-
-  // Post comment
-  postBtn.onclick = async () => {
-    let text = commentInput.value.trim();
-    if (text.length === 0) return alert("Please write something 💜");
-    await addDoc(collection(db, "comments"), {
-      text: text,
-      time: serverTimestamp()
+      document.getElementById("commentInput").value = "";
     });
-    commentInput.value = "";
-  };
 
-  // Real-time listener
-  onSnapshot(collection(db, "comments"), snap => {
-    commentList.innerHTML = "";
-    snap.forEach(doc => {
-      let div = document.createElement("div");
-      div.className = "comment";
-      div.textContent = doc.data().text;
-      commentList.appendChild(div);
+    // ✅ Show comments live
+    const commentsList = document.getElementById("commentsList");
+
+    onValue(ref(db, "comments"), (snapshot) => {
+      commentsList.innerHTML = "";
+      snapshot.forEach((child) => {
+        const data = child.val();
+        const div = document.createElement("div");
+        div.classList.add("comment-item");
+        div.textContent = data.text;
+        commentsList.appendChild(div);
+      });
     });
-  });
-</script>
+  </script>
 
 </body>
+
 </html>
