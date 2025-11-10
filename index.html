@@ -115,24 +115,6 @@
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 
-  /* Enhancements - Achievements Badge */
-  .badge {
-    display: inline-block;
-    background: #ffd166;
-    padding: 6px 14px;
-    border-radius: 25px;
-    font-weight: 600;
-    color: #5a3e1b;
-    box-shadow: 0 3px 8px rgba(255, 209, 102, 0.5);
-    animation: wiggle 2s infinite;
-    margin-top: 10px;
-  }
-  @keyframes wiggle {
-    0%,100% { transform: rotate(0deg); }
-    50% { transform: rotate(2deg); }
-  }
-
-  /* Comments */
   .comment-box {
     margin-top: 30px;
     padding: 20px;
@@ -140,7 +122,6 @@
     border-radius: 16px;
   }
   .comment-box h3 { color: #8b5cf6; }
-
   textarea {
     width: 100%;
     min-height: 80px;
@@ -150,7 +131,6 @@
     font-size: 14px;
     resize: none;
   }
-
   .add-btn {
     background: #8b5cf6;
     border: none;
@@ -161,32 +141,12 @@
     cursor: pointer;
     font-size: 15px;
   }
-
   .comment {
     background: white;
     border-radius: 10px;
     padding: 8px;
     margin-top: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.10);
-    animation: fadeInUp 0.4s;
-  }
-
-  .comment:nth-child(odd) {
-    background: #ffffff;
-  }
-  .comment:nth-child(even) {
-    background: #f8f1ff;
-  }
-
-  @keyframes fadeInUp {
-    0% { opacity: 0; transform: translateY(10px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
-
-  footer {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 14px;
   }
 </style>
 </head>
@@ -213,8 +173,6 @@
           Visit my YouTube Channel — Dancingdoll #Aadu 💃
         </a>
       </div>
-
-      <div class="badge">🏆 Creative Star</div>
     </div>
   </div>
 
@@ -236,7 +194,7 @@
   <div class="section grid">
     <div>
       <h3>🎨 My Hobbies</h3>
-      <p>🎶 Dancing | 📖 Reading | ✏️ Sketching | 🏀 Basketball</p>
+      <p>Dancing | Reading | Sketching | Basketball</p>
     </div>
     <div>
       <h3>🎂 My Birthday</h3>
@@ -274,16 +232,17 @@
   <footer>✨ Made with love by <b>Aadya Pandey</b> 💜</footer>
 </div>
 
-<!-- Firebase Realtime DB -->
+<!-- ✅ Firebase Realtime Database Code -->
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
-  import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-database.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+  import { getDatabase, ref, push, onValue } 
+    from "https://www.gstatic.com/firebasejs/12.5.0/firebase-database.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyAXiWeS0W7JMPZCU5w6mc_NVbvX7Qyn6ck",
     authDomain: "aadya-profile-comments.firebaseapp.com",
-    databaseURL: "https://aadya-profile-comments-default-rtdb.asia-southeast1.firebasedatabase.app",
     projectId: "aadya-profile-comments",
+    databaseURL: "https://aadya-profile-comments-default-rtdb.firebaseio.com/",
     storageBucket: "aadya-profile-comments.firebasestorage.app",
     messagingSenderId: "176771895161",
     appId: "1:176771895161:web:dd2912e0680e9144b7e9a8"
@@ -296,46 +255,30 @@
   const postBtn = document.getElementById("postComment");
   const commentList = document.getElementById("commentList");
 
-  // Post comment
+  // ✅ Post comment
   postBtn.onclick = async () => {
     let text = commentInput.value.trim();
-    if (!text) return alert("Please write something 💜");
+    if (text.length === 0) return alert("Please write something 💜");
 
-    // Safe vibration call
-    try {
-      if (navigator.vibrate) {
-        navigator.vibrate(80);
-      }
-    } catch(e) {}
-
-    await push(ref(db, "comments"), {
+    push(ref(db, "comments"), {
       text: text,
       time: Date.now()
     });
 
     commentInput.value = "";
-
-    setTimeout(() => {
-      commentList.scrollTop = commentList.scrollHeight;
-    }, 200);
   };
 
-  // Listen for updates
+  // ✅ Real-time display
   onValue(ref(db, "comments"), snapshot => {
     commentList.innerHTML = "";
-    const data = snapshot.val();
-
-    if (!data) return;
-
-    Object.values(data).forEach(c => {
+    snapshot.forEach(child => {
       let div = document.createElement("div");
       div.className = "comment";
-      div.textContent = c.text;
+      div.textContent = child.val().text;
       commentList.appendChild(div);
     });
-
-    commentList.scrollTop = commentList.scrollHeight;
   });
+
 </script>
 
 </body>
