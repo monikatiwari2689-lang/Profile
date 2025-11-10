@@ -61,13 +61,6 @@
     border: 5px solid #b48ef7;
     box-shadow: 0 0 20px rgba(180,142,247,0.4);
     object-fit: cover;
-    transition: 0.3s ease; /* ✅ Enhancement #4 */
-  }
-
-  /* Enhancement #4: Hover effect */
-  .profile-pic:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 30px rgba(180,142,247,0.7);
   }
 
   .intro h1 {
@@ -93,16 +86,10 @@
     box-shadow: 0 4px 12px rgba(171,90,255,0.4);
     animation: pulse 2s infinite;
   }
-
-  /* Enhancement #3: Glowing effect */
-  @keyframes glow {
-    from { box-shadow: 0 0 10px #bb86fc; }
-    to { box-shadow: 0 0 25px #d966ff; }
+  .youtube-highlight a {
+    color: white;
+    text-decoration: none;
   }
-  .youtube-highlight {
-    animation: glow 2s infinite alternate, pulse 2s infinite;
-  }
-
   @keyframes pulse {
     0%,100% { transform: scale(1); }
     50% { transform: scale(1.05); }
@@ -128,6 +115,7 @@
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 
+  /* Enhancements - Achievements Badge */
   .badge {
     display: inline-block;
     background: #ffd166;
@@ -183,8 +171,12 @@
     animation: fadeInUp 0.4s;
   }
 
-  .comment:nth-child(odd) { background: #ffffff; }
-  .comment:nth-child(even) { background: #f8f1ff; }
+  .comment:nth-child(odd) {
+    background: #ffffff;
+  }
+  .comment:nth-child(even) {
+    background: #f8f1ff;
+  }
 
   @keyframes fadeInUp {
     0% { opacity: 0; transform: translateY(10px); }
@@ -195,11 +187,6 @@
     text-align: center;
     margin-top: 20px;
     font-size: 14px;
-  }
-
-  /* Enhancement #1 Falling emojis */
-  @keyframes fall {
-    to { transform: translateY(100vh); opacity: 0; }
   }
 </style>
 </head>
@@ -217,9 +204,7 @@
     </div>
 
     <div class="intro">
-      <!-- Enhancement #2 typing animation -->
-      <h1 id="nameTitle"></h1>
-
+      <h1>💜 Aadya Pandey</h1>
       <p>Age 9 | Student at Billabong High International School 📘</p>
       <p>Born in Indore, living in Pune ✈️</p>
 
@@ -232,8 +217,6 @@
       <div class="badge">🏆 Creative Star</div>
     </div>
   </div>
-
-  <!-- YOUR SECTIONS REMAIN EXACTLY THE SAME -->
 
   <div class="section grid">
     <div>
@@ -280,12 +263,6 @@
     </div>
   </div>
 
-  <!-- Fun Fact Enhancement (#5) -->
-  <div class="section">
-    <h3>🌟 Fun Fact</h3>
-    <p>I can solve maths puzzles super fast! 🔢✨</p>
-  </div>
-
   <div class="comment-box">
     <h3>💬 Leave a Comment for Aadya</h3>
     <textarea id="commentInput" placeholder="Write your message..."></textarea><br>
@@ -297,37 +274,7 @@
   <footer>✨ Made with love by <b>Aadya Pandey</b> 💜</footer>
 </div>
 
-<!-- Enhancement #2 Typing animation for name -->
-<script>
-  let text = "💜 Aadya Pandey";
-  let i = 0;
-  function type() {
-    if (i < text.length) {
-      document.getElementById("nameTitle").innerHTML += text.charAt(i);
-      i++;
-      setTimeout(type, 100);
-    }
-  }
-  type();
-</script>
-
-<!-- Enhancement #1 Falling emojis -->
-<script>
-  const emojis = ["💜","✨","🌸","💃","🏀","🎨","📚"];
-  setInterval(() => {
-    let e = document.createElement("div");
-    e.innerText = emojis[Math.floor(Math.random()*emojis.length)];
-    e.style.position = "fixed";
-    e.style.left = Math.random()*100 + "vw";
-    e.style.top = "-20px";
-    e.style.fontSize = "20px";
-    e.style.animation = "fall 3s linear forwards";
-    document.body.appendChild(e);
-    setTimeout(()=>e.remove(),3000);
-  }, 1000);
-</script>
-
-<!-- Your Firebase Realtime Database code (UNCHANGED) -->
+<!-- Firebase Realtime DB -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
   import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-database.js";
@@ -349,11 +296,17 @@
   const postBtn = document.getElementById("postComment");
   const commentList = document.getElementById("commentList");
 
+  // Post comment
   postBtn.onclick = async () => {
     let text = commentInput.value.trim();
     if (!text) return alert("Please write something 💜");
 
-    if (navigator.vibrate) navigator.vibrate(80);
+    // Safe vibration call
+    try {
+      if (navigator.vibrate) {
+        navigator.vibrate(80);
+      }
+    } catch(e) {}
 
     await push(ref(db, "comments"), {
       text: text,
@@ -367,9 +320,11 @@
     }, 200);
   };
 
+  // Listen for updates
   onValue(ref(db, "comments"), snapshot => {
     commentList.innerHTML = "";
     const data = snapshot.val();
+
     if (!data) return;
 
     Object.values(data).forEach(c => {
